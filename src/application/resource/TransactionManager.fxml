@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+    <top>
+        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Open">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="155.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="157.5" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="157.5" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                                            <GridPane.margin>
+                                                <Insets left="10.0" />
+                                            </GridPane.margin></Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="10.0" />
+                                            </GridPane.margin></Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date Open" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="10.0" />
+                                            </GridPane.margin></Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance" GridPane.rowIndex="3">
+                                            <GridPane.margin>
+                                                <Insets left="10.0" />
+                                            </GridPane.margin></Text>
+                                        <TextField fx:id="Ofname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="155.0" GridPane.columnIndex="1">
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                            <GridPane.margin>
+                                                <Insets />
+                                            </GridPane.margin></TextField>
+                                        <TextField fx:id="Olname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                        </TextField>
+                                        <GridPane maxWidth="155.0" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="55.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <TextField fx:id="month" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="40.0" promptText="mm" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="CENTER" wrappingWidth="10.0" GridPane.columnIndex="1" />
+                                                <TextField fx:id="day" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="40.0" promptText="dd" GridPane.columnIndex="2" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="CENTER" wrappingWidth="10.0" GridPane.columnIndex="3" />
+                                                <TextField fx:id="year" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="55.0" promptText="yyyy" GridPane.columnIndex="4">
+                                                    <GridPane.margin>
+                                                        <Insets />
+                                                    </GridPane.margin></TextField>
+                                            </children>
+                                            <GridPane.margin>
+                                                <Insets />
+                                            </GridPane.margin>
+                                        </GridPane>
+                                        <TextField fx:id="Obalance" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                        </TextField>
+                                        <RadioButton fx:id="OChecking" mnemonicParsing="false" onAction="#OselectChecking" text="Checking" GridPane.columnIndex="3">
+                                            <GridPane.margin>
+                                                <Insets left="20.0" />
+                                            </GridPane.margin>
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="OAccount" />
+                                            </toggleGroup></RadioButton>
+                                        <RadioButton fx:id="OSavings" mnemonicParsing="false" onAction="#OselectSavings" text="Savings" toggleGroup="$OAccount" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="20.0" />
+                                            </GridPane.margin></RadioButton>
+                                        <RadioButton fx:id="OMoneyMarket" mnemonicParsing="false" onAction="#OselectMoneyMarket" text="Money Market" toggleGroup="$OAccount" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="20.0" />
+                                            </GridPane.margin></RadioButton>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#add" prefWidth="60.0" text="Open" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                        <CheckBox fx:id="OdirectDeposit" mnemonicParsing="false" text="Direct Deposit" GridPane.columnIndex="4">
+                                            <GridPane.margin>
+                                                <Insets left="20.0" />
+                                            </GridPane.margin></CheckBox>
+                                        <CheckBox fx:id="OisLoyal" mnemonicParsing="false" text="Loyal Customer" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="20.0" />
+                                            </GridPane.margin></CheckBox>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Oclear" prefWidth="60.0" text="Clear" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Close">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="630.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="120.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="630.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="120.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="400.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="140.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="260.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                                                            <GridPane.margin>
+                                                                <Insets left="30.0" top="5.0" />
+                                                            </GridPane.margin>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" GridPane.rowIndex="1">
+                                                            <GridPane.margin>
+                                                                <Insets left="30.0" top="5.0" />
+                                                            </GridPane.margin>
+                                                        </Text>
+                                                        <TextField fx:id="Cfname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1">
+                                                            <opaqueInsets>
+                                                                <Insets />
+                                                            </opaqueInsets>
+                                                            <GridPane.margin>
+                                                                <Insets top="5.0" />
+                                                            </GridPane.margin>
+                                                        </TextField>
+                                                        <TextField fx:id="Clname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                            <opaqueInsets>
+                                                                <Insets />
+                                                            </opaqueInsets>
+                                                            <GridPane.margin>
+                                                                <Insets top="5.0" />
+                                                            </GridPane.margin>
+                                                        </TextField>
+                                                    </children>
+                                                </GridPane>
+                                                <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="230.0" GridPane.columnIndex="1">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <RadioButton fx:id="CChecking" mnemonicParsing="false" text="Checking">
+                                                            <GridPane.margin>
+                                                                <Insets left="20.0" top="2.0" />
+                                                            </GridPane.margin>
+                                                            <toggleGroup>
+                                                                <ToggleGroup fx:id="CAccount" />
+                                                            </toggleGroup>
+                                                        </RadioButton>
+                                                        <RadioButton fx:id="CSavings" mnemonicParsing="false" text="Savings" toggleGroup="$CAccount" GridPane.rowIndex="1">
+                                                            <GridPane.margin>
+                                                                <Insets left="20.0" top="2.0" />
+                                                            </GridPane.margin>
+                                                        </RadioButton>
+                                                        <RadioButton fx:id="CMoneyMarket" mnemonicParsing="false" text="Money Market" toggleGroup="$CAccount" GridPane.rowIndex="2">
+                                                            <GridPane.margin>
+                                                                <Insets left="20.0" top="2.0" />
+                                                            </GridPane.margin>
+                                                        </RadioButton>
+                                                    </children>
+                                                </GridPane>
+                                            </children>
+                                        </GridPane>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="630.0" GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefWidth="75.0" text="Close" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="15.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Cclear" prefWidth="75.0" text="Clear" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="15.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Deposit">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="630.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="135.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="630.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="140.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="260.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                                                    <GridPane.margin>
+                                                        <Insets left="30.0" />
+                                                    </GridPane.margin>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets left="30.0" />
+                                                    </GridPane.margin>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets left="30.0" />
+                                                    </GridPane.margin>
+                                                </Text>
+                                                <TextField fx:id="Dfname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1">
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
+                                                    <GridPane.margin>
+                                                        <Insets />
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <TextField fx:id="Dlname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
+                                                    <GridPane.margin>
+                                                        <Insets />
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <TextField fx:id="Damount" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
+                                                </TextField>
+                                                <RadioButton fx:id="DChecking" mnemonicParsing="false" text="Checking" GridPane.columnIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets left="20.0" />
+                                                    </GridPane.margin>
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="DAccount" />
+                                                    </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="DSavings" mnemonicParsing="false" text="Savings" toggleGroup="$DAccount" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets left="20.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="DMoneyMarket" mnemonicParsing="false" text="Money Market" toggleGroup="$DAccount" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets left="20.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
+                                            </children>
+                                        </GridPane>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="630.0" GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deposit" prefWidth="100.0" text="Deposit" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="12.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Dclear" prefWidth="100.0" text="Clear" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="12.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Withdraw">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="630.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="135.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="630.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="140.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="260.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                                                    <GridPane.margin>
+                                                        <Insets left="30.0" />
+                                                    </GridPane.margin>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets left="30.0" />
+                                                    </GridPane.margin>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets left="30.0" />
+                                                    </GridPane.margin>
+                                                </Text>
+                                                <TextField fx:id="Wfname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1">
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
+                                                    <GridPane.margin>
+                                                        <Insets />
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <TextField fx:id="Wlname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
+                                                    <GridPane.margin>
+                                                        <Insets />
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <TextField fx:id="Wamount" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
+                                                </TextField>
+                                                <RadioButton fx:id="WChecking" mnemonicParsing="false" text="Checking" GridPane.columnIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets left="20.0" />
+                                                    </GridPane.margin>
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="WAccount" />
+                                                    </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="WSavings" mnemonicParsing="false" text="Savings" toggleGroup="$WAccount" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets left="20.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="WMoneyMarket" mnemonicParsing="false" text="Money Market" toggleGroup="$WAccount" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets left="20.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
+                                            </children>
+                                        </GridPane>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="630.0" GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#withdraw" prefWidth="100.0" text="Withdraw" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="12.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Wclear" prefWidth="100.0" text="Clear" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="12.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Print">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="630.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="135.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="630.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="630.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <RadioButton fx:id="PList" mnemonicParsing="false" text="Print Accounts (No Statement)">
+                                                    <GridPane.margin>
+                                                        <Insets left="220.0" />
+                                                    </GridPane.margin>
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="Print" />
+                                                    </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="PDate" mnemonicParsing="false" text="Account Statement by Date Opened" toggleGroup="$Print" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets left="220.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="PName" mnemonicParsing="false" text="Account Statement by Last Name" toggleGroup="$Print" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets left="220.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
+                                            </children>
+                                        </GridPane>
+                                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="630.0" GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#print" prefWidth="75.0" text="Print" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="12.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Pclear" prefWidth="75.0" text="Clear" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                                    <GridPane.margin>
+                                                        <Insets top="12.0" />
+                                                    </GridPane.margin>
+                                                </Button>
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Import/Export">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="180.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#importFile" prefWidth="120.0" text="Import" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                            <GridPane.margin>
+                                                <Insets top="12.0" />
+                                            </GridPane.margin>
+                                        </Button>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exportFile" prefWidth="120.0" text="Export" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                            <GridPane.margin>
+                                                <Insets top="12.0" />
+                                            </GridPane.margin>
+                                        </Button>
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Restart/End">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="180.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#restart" prefWidth="120.0" text="Restart Program" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                            <GridPane.margin>
+                                                <Insets top="12.0" />
+                                            </GridPane.margin>
+                                        </Button>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#end" prefWidth="120.0" text="End Program" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                            <GridPane.margin>
+                                                <Insets top="12.0" />
+                                            </GridPane.margin>
+                                        </Button>
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </TabPane>
+    </top>
+    <bottom>
+        <TextArea fx:id="output" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="680.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" />
+            </BorderPane.margin>
+        </TextArea>
+    </bottom>
+</BorderPane>
