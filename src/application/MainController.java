@@ -32,6 +32,8 @@ public class MainController {
 	/** To avoid magic number. */
 	private static final int EMPTY = 0;
 
+	/** Account database. */
+	private AccountDatabase accounts = new AccountDatabase();
 
 	/** TextArea to display output. */
 	@FXML
@@ -59,7 +61,64 @@ public class MainController {
 	 */
 	@FXML
 	void add(ActionEvent event) {
+		String fname = Ofname.getText();
+		String lname = Olname.getText();
+		if (fname.equals("") || lname.equals("")) {
+			addOutput("Please fill out the name.\n");
+			return;
+		}
 
+		if (month.getText().equals("") || day.getText().equals("") || year.getText().equals("")) {
+			addOutput("Please fill out the date.\n");
+			return;
+		}
+		String dateStr = month.getText() + "/" + day.getText() + "/" + year.getText();
+		Date date = Date.toDate(dateStr);
+		if (date == null) {
+			addOutput(dateStr + " is not a valid date.\n");
+			month.clear(); day.clear(); year.clear();
+			return;
+		}
+
+		if (Obalance.getText().equals("")) {
+			addOutput("Please fill out the balance.\n");
+			return;
+		}
+		double balance = 0;
+		try {
+			balance = Double.valueOf(Obalance.getText());
+		} catch (NumberFormatException e) {
+			addOutput(Obalance.getText() + " is not a valid balance.\n");
+			Obalance.clear();
+			return;
+		}
+		if (balance <= 0) {
+			addOutput("Amount cannot be " + Obalance.getText() + ".\n");
+			Obalance.clear();
+			return;
+		}
+
+		if (!OChecking.isSelected() && !OSavings.isSelected() && !OMoneyMarket.isSelected()) {
+			addOutput("Please select account type.\n");
+			return;
+		}
+
+		Account newAccount = null;
+		if (OChecking.isSelected()) {
+			boolean directDeposit = Boolean.valueOf(OdirectDeposit.isSelected());
+			newAccount = new Checking(new Profile(fname, lname), balance, date, directDeposit);
+		} else if (OSavings.isSelected()) {
+			boolean isLoyal = Boolean.valueOf(OisLoyal.isSelected());
+			newAccount = new Savings(new Profile(fname, lname), balance, date, isLoyal);
+		} else {
+			newAccount = new MoneyMarket(new Profile(fname, lname), balance, date, EMPTY);
+		}
+
+		if (accounts.add(newAccount)) {
+			addOutput("Account opened and added to the database.\n");
+		} else {
+			addOutput("Account is already in the database.\n");
+		}
 	}
 
 	/**
@@ -68,7 +127,9 @@ public class MainController {
 	 */
 	@FXML
 	void OselectChecking(ActionEvent event) {
-
+		OdirectDeposit.setDisable(false);
+		OisLoyal.setSelected(false);
+		OisLoyal.setDisable(true);
 	}
 
 	/**
@@ -77,7 +138,9 @@ public class MainController {
 	 */
 	@FXML
 	void OselectSavings(ActionEvent event) {
-
+		OdirectDeposit.setSelected(false);
+		OdirectDeposit.setDisable(true);
+		OisLoyal.setDisable(false);
 	}
 
 	/**
@@ -86,7 +149,10 @@ public class MainController {
 	 */
 	@FXML
 	void OselectMoneyMarket(ActionEvent event) {
-
+		OdirectDeposit.setSelected(false);
+		OdirectDeposit.setDisable(true);
+		OisLoyal.setSelected(false);
+		OisLoyal.setDisable(true);
 	}
 
 	/**
@@ -95,7 +161,19 @@ public class MainController {
 	 */
 	@FXML
 	void Oclear(ActionEvent event) {
-
+		Ofname.clear();
+		Olname.clear();
+		Obalance.clear();
+		month.clear();
+		day.clear();
+		year.clear();
+		OChecking.setSelected(false);
+		OSavings.setSelected(false);
+		OMoneyMarket.setSelected(false);
+		OdirectDeposit.setDisable(false);
+		OisLoyal.setDisable(false);
+		OdirectDeposit.setSelected(false);
+		OisLoyal.setSelected(false);
 	}
 
 	/** TextFields in Close section. */
@@ -116,7 +194,32 @@ public class MainController {
 	 */
 	@FXML
 	void close(ActionEvent event) {
+		String fname = Cfname.getText();
+		String lname = Clname.getText();
+		if (fname.equals("") || lname.equals("")) {
+			addOutput("Please fill out the name.\n");
+			return;
+		}
 
+		if (!CChecking.isSelected() && !CSavings.isSelected() && !CMoneyMarket.isSelected()) {
+			addOutput("Please select account type.\n");
+			return;
+		}
+
+		Account targetAccount = null;
+		if (CChecking.isSelected()) {
+			targetAccount = new Checking(new Profile(fname, lname), EMPTY, null, false);
+		} else if (CSavings.isSelected()) {
+			targetAccount = new Savings(new Profile(fname, lname), EMPTY, null, false);
+		} else {
+			targetAccount = new MoneyMarket(new Profile(fname, lname), EMPTY, null, EMPTY);
+		}
+
+		if (accounts.remove(targetAccount)) {
+			addOutput("Account closed and removed from the database.\n");
+		} else {
+			addOutput("Account does not exist.\n");
+		}
 	}
 
 	/**
@@ -125,7 +228,11 @@ public class MainController {
 	 */
 	@FXML
 	void Cclear(ActionEvent event) {
-
+		Cfname.clear();
+		Clname.clear();
+		CChecking.setSelected(false);
+		CSavings.setSelected(false);
+		CMoneyMarket.setSelected(false);
 	}
 
 	/** TextFields in Deposit section. */
@@ -146,7 +253,50 @@ public class MainController {
 	 */
 	@FXML
 	void deposit(ActionEvent event) {
+		String fname = Dfname.getText();
+		String lname = Dlname.getText();
+		if (fname.equals("") || lname.equals("")) {
+			addOutput("Please fill out the name.\n");
+			return;
+		}
 
+		if (Damount.getText().equals("")) {
+			addOutput("Please fill out the amount.\n");
+			return;
+		}
+		double amount = 0;
+		try {
+			amount = Double.valueOf(Damount.getText());
+		} catch (NumberFormatException e) {
+			addOutput(Damount.getText() + " is not a valid amount.\n");
+			Damount.clear();
+			return;
+		}
+		if (amount <= 0) {
+			addOutput("Amount cannot be " + Damount.getText() + ".\n");
+			Damount.clear();
+			return;
+		}
+
+		if (!DChecking.isSelected() && !DSavings.isSelected() && !DMoneyMarket.isSelected()) {
+			addOutput("Please select account type.\n");
+			return;
+		}
+
+		Account targetAccount = null;
+		if (DChecking.isSelected()) {
+			targetAccount = new Checking(new Profile(fname, lname), EMPTY, null, false);
+		} else if (DSavings.isSelected()) {
+			targetAccount = new Savings(new Profile(fname, lname), EMPTY, null, false);
+		} else {
+			targetAccount = new MoneyMarket(new Profile(fname, lname), EMPTY, null, EMPTY);
+		}
+
+		if (accounts.deposit(targetAccount, amount)) {
+			addOutput(String.format("%,.2f", amount) + " deposited to account.\n");
+		} else {
+			addOutput("Account does not exist.\n");
+		}
 	}
 
 	/**
@@ -155,7 +305,12 @@ public class MainController {
 	 */
 	@FXML
 	void Dclear(ActionEvent event) {
-
+		Dfname.clear();
+		Dlname.clear();
+		Damount.clear();
+		DChecking.setSelected(false);
+		DSavings.setSelected(false);
+		DMoneyMarket.setSelected(false);
 	}
 
 	/** TextFields in Withdraw section. */
@@ -176,7 +331,53 @@ public class MainController {
 	 */
 	@FXML
 	void withdraw(ActionEvent event) {
+		String fname = Wfname.getText();
+		String lname = Wlname.getText();
+		if (fname.equals("") || lname.equals("")) {
+			addOutput("Please fill out the name.\n");
+			return;
+		}
 
+		if (Wamount.getText().equals("")) {
+			addOutput("Please fill out the amount.\n");
+			return;
+		}
+		double amount = 0;
+		try {
+			amount = Double.valueOf(Wamount.getText());
+		} catch (NumberFormatException e) {
+			addOutput(Wamount.getText() + " is not a valid amount.\n");
+			Wamount.clear();
+			return;
+		}
+		if (amount <= 0) {
+			addOutput("Amount cannot be " + Wamount.getText() + ".\n");
+			Wamount.clear();
+			return;
+		}
+
+		if (!WChecking.isSelected() && !WSavings.isSelected() && !WMoneyMarket.isSelected()) {
+			addOutput("Please select account type.\n");
+			return;
+		}
+
+		Account targetAccount = null;
+		if (WChecking.isSelected()) {
+			targetAccount = new Checking(new Profile(fname, lname), EMPTY, null, false);
+		} else if (WSavings.isSelected()) {
+			targetAccount = new Savings(new Profile(fname, lname), EMPTY, null, false);
+		} else {
+			targetAccount = new MoneyMarket(new Profile(fname, lname), EMPTY, null, EMPTY);
+		}
+
+		int code = accounts.withdrawal(targetAccount, amount);
+		if (code == 0) {
+			addOutput(String.format("%,.2f", amount) + " withdrawn from account.\n");
+		} else if (code == 1) {
+			addOutput("Insufficient funds.\n");
+		} else {
+			addOutput("Account does not exist.\n");
+		}
 	}
 
 	/**
@@ -185,7 +386,12 @@ public class MainController {
 	 */
 	@FXML
 	void Wclear(ActionEvent event) {
-
+		Wfname.clear();
+		Wlname.clear();
+		Wamount.clear();
+		WChecking.setSelected(false);
+		WSavings.setSelected(false);
+		WMoneyMarket.setSelected(false);
 	}
 
 	/** RadioButtons in Print section. */
@@ -202,7 +408,17 @@ public class MainController {
 	 */
 	@FXML
 	void print(ActionEvent event) {
-
+		if (!PList.isSelected() && !PDate.isSelected() && !PName.isSelected()) {
+			addOutput("Please select print method.\n");
+			return;
+		}
+		if (PList.isSelected()) {
+			addOutput(accounts.printAccount());
+		} else if (PDate.isSelected()) {
+			addOutput(accounts.statementByDateOpen());
+		} else {
+			addOutput(accounts.statementByLastName());
+		}
 	}
 
 	/**
@@ -211,7 +427,9 @@ public class MainController {
 	 */
 	@FXML
 	void Pclear(ActionEvent event) {
-
+		PList.setSelected(false);
+		PDate.setSelected(false);
+		PName.setSelected(false);
 	}
 
 	/**
@@ -220,7 +438,18 @@ public class MainController {
 	 */
 	@FXML
 	void importFile(ActionEvent event) {
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Select File");
+		File file = fc.showOpenDialog(null);
+		if (file == null) {
+			return;
+		}
 
+		try {
+			addOutput(accounts.importFile(file));
+		} catch (FileNotFoundException e) {
+			addOutput("File not found.\n");
+		}
 	}
 
 	/**
@@ -229,7 +458,7 @@ public class MainController {
 	 */
 	@FXML
 	void exportFile(ActionEvent event) {
-
+		addOutput(accounts.exportFile());
 	}
 
 	/**
@@ -238,7 +467,13 @@ public class MainController {
 	 */
 	@FXML
 	void restart(ActionEvent event) {
-
+		Oclear(event);
+		Cclear(event);
+		Dclear(event);
+		Wclear(event);
+		Pclear(event);
+		output.clear();
+		accounts = new AccountDatabase();
 	}
 
 	/**
