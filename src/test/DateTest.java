@@ -1,5 +1,3 @@
-package test;
-
 import application.Date;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * DateTest Class
- * This class tests the Date class.
+ * This class tests the Date class.test
  */
 class DateTest {
 
