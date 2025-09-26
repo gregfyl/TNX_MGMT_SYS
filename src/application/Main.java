@@ -11,12 +11,12 @@ import javafx.stage.Stage;
  */
 
 public class Main extends Application {
-	
+
 	/** To avoid magic number. */
 	private static final int WIDTH = 700;
 	/** To avoid magic number. */
 	private static final int HEIGHT = 500;
-	
+
 	/**
 	 * Start the program.
 	 */
@@ -33,7 +33,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Launch the window.
 	 * @param args Command-line arguments.

@@ -55,6 +55,34 @@ public class AccountDatabase {
 	}
 
 	/**
+	 * Find an account from accounts.
+	 * @param accountId Account unique identifier.
+	 * @return Index of the target account in accounts. -1 if no target account.
+	 */
+	private int findByAccountId(String accountId) {
+		for (int i = 0; i < size; i++) {
+			if (accounts[i].getAccountId().equals(accountId)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Find an account from accounts.
+	 * @param accountId Account unique identifier.
+	 * @return Index of the target account in accounts. -1 if no target account.
+	 */
+	private int findByName(String fname, String lname) {
+		for (int i = 0; i < size; i++) {
+			if (accounts[i].getHolder().getFname().equals(fname) && accounts[i].getHolder().getLname().equals(lname)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
 	 * Grow the capacity of accounts by 5.
 	 */
 	private void grow() {
@@ -242,7 +270,7 @@ public class AccountDatabase {
 		output += "--end of listing--\n";
 		return output;
 	}
-	
+
 	/**
 	 * Print accounts by list.
 	 * @param file Imported file.
@@ -259,8 +287,9 @@ public class AccountDatabase {
 			if (command.length() == EMPTY) {
 				continue; // If command is empty, ignore it and read next command.
 			}
-			
+
 			try {
+				String accountId = scl.next();
 				String accountType = scl.next();
 
 				if (accountType.equals("C") || accountType.equals("S") || accountType.equals("M")) {
@@ -277,13 +306,13 @@ public class AccountDatabase {
 					Account newAccount = null;
 					if (accountType.equals("C")) {
 						boolean directDeposit = scl.nextBoolean();
-						newAccount = new Checking(new Profile(fname, lname), balance, date, directDeposit);
+						newAccount = new Checking(new Profile(fname, lname), balance, date, directDeposit, accountId);
 					} else if (accountType.equals("S")) {
 						boolean isLoyal = scl.nextBoolean();
-						newAccount = new Savings(new Profile(fname, lname), balance, date, isLoyal);
+						newAccount = new Savings(new Profile(fname, lname), balance, date, isLoyal, accountId);
 					} else {
 						int withdrawals = scl.nextInt();
-						newAccount = new MoneyMarket(new Profile(fname, lname), balance, date, withdrawals);
+						newAccount = new MoneyMarket(new Profile(fname, lname), balance, date, withdrawals, accountId);
 					}
 
 					if (add(newAccount)) {
@@ -306,7 +335,7 @@ public class AccountDatabase {
 		sc.close();
 		return output;
 	}
-	
+
 	/**
 	 * Export the database to file.
 	 * @return Output string.
@@ -317,12 +346,13 @@ public class AccountDatabase {
 			FileWriter fw = new FileWriter("Database.txt");
 			for (int i = 0; i < size; i++) {
 				Account account = accounts[i];
+				fw.write(account.getAccountId() + ",");
 				fw.write(account.getClass().getSimpleName().charAt(0) + ",");
 				fw.write(account.getHolder().getFname() + ",");
 				fw.write(account.getHolder().getLname() + ",");
-				fw.write(String.format("%,.2f", account.getBalance()) + ",");
+				fw.write(String.format("%.2f", account.getBalance()) + ",");
 				fw.write(account.getDateOpen() + ",");
-				
+
 				if(account.getClass().getSimpleName().equals("Checking")) {
 					fw.write(((Checking) account).getDirectDeposit() + "\n");
 				} else if(account.getClass().getSimpleName().equals("Savings")) {
@@ -330,7 +360,7 @@ public class AccountDatabase {
 				} else {
 					fw.write(((MoneyMarket) account).getWithdrawals() + "\n");
 				}
-				
+
 			}
 			output += "Export to Database.txt complete.\n";
 			fw.close();
