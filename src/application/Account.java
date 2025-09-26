@@ -127,6 +127,13 @@ public abstract class Account {
 	 * Get the account unique identifier.
 	 * @return Account unique identifier.
 	 */
+	public String getAccountId() {
+		return accountId;
+
+	/**
+	 * Get the account unique identifier.
+	 * @return Account unique identifier.
+	 */
 	public UUID getUuid() {
 		return uuid;
 	}
