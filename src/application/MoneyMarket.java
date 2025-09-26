@@ -1,5 +1,6 @@
 package application;
 
+import java.util.UUID;
 /**
  * MoneyMarket Class
  * This class defines the Money Market account.
@@ -33,6 +34,20 @@ public class MoneyMarket extends Account {
 	 */
 	public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals) {
 		super(holder, balance, dateOpen);
+		this.withdrawals = withdrawals;
+	}
+
+
+	/**
+	 * 2nd constructor Initialize the account by holder, balance, dateOpen, withdrawals and uuid.
+	 * @param holder      Holder of the account.
+	 * @param balance     Balance of the account.
+	 * @param dateOpen    Date of the account opened.
+	 * @param withdrawals Number of withdrawal(s) of the account.
+	 * @param uuid Account unique identifier.
+	 */
+	public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals, UUID uuid) {
+		super(holder, balance, dateOpen, uuid);
 		this.withdrawals = withdrawals;
 	}
 
