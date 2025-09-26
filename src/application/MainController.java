@@ -178,6 +178,47 @@ public class MainController {
 
 	/** TextFields in Close section. */
 	@FXML
+	private TextField Sfname, Slname;
+
+	/** RadioButtons in Close section. */
+	@FXML
+	private RadioButton SChecking, SSavings, SMoneyMarket;
+
+	/** ToggleGroup in Close section. */
+	@FXML
+	private ToggleGroup SAccount;
+
+	public void search(ActionEvent actionEvent) {
+		String fname = Sfname.getText();
+		String lname = Slname.getText();
+		if (fname.equals("") || lname.equals("")) {
+			addOutput("Please fill out the name.\n");
+			return;
+		}
+
+		if (!SChecking.isSelected() && !SSavings.isSelected() && !SMoneyMarket.isSelected()) {
+			addOutput("Please select account type.\n");
+			return;
+		}
+
+		Account targetAccount = null;
+		if (SChecking.isSelected()) {
+			targetAccount = new Checking(new Profile(fname, lname), EMPTY, null, false);
+		} else if (SSavings.isSelected()) {
+			targetAccount = new Savings(new Profile(fname, lname), EMPTY, null, false);
+		} else {
+			targetAccount = new MoneyMarket(new Profile(fname, lname), EMPTY, null, EMPTY);
+		}
+
+		if (accounts.remove(targetAccount)) {
+			addOutput("Account closed and removed from the database.\n");
+		} else {
+			addOutput("Account does not exist.\n");
+		}
+	}
+
+	/** TextFields in Close section. */
+	@FXML
 	private TextField Cfname, Clname;
 
 	/** RadioButtons in Close section. */
