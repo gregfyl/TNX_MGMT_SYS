@@ -78,7 +78,7 @@ public class MoneyMarket extends Account {
 	 */
 	@Override
 	public String toString() {
-		String output = "*Money Market*" + super.toString();
+		String output = super.toString();
 		if (withdrawals == ONE_WITHDRAWAL) {
 			output += "*" + withdrawals + " withdrawal*";
 		} else {

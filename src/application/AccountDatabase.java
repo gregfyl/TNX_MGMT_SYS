@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.UUID;
 
 /**
  * AccountDatabase Class
@@ -56,6 +56,37 @@ public class AccountDatabase {
 	}
 
 	/**
+	 * Find an account from accounts.
+	 * @param accountId Account unique identifier.
+	 * @return Index of the target account in accounts. -1 if no target account.
+	 */
+	public int findByAccountId(String accountId) {
+		for (int i = 0; i < size; i++) {
+			if (accounts[i].getAccountId().equals(accountId)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Find an account from accounts.
+	 *
+	 * @param fname First name of the account holder.
+	 * @param lname Last name of the account holder.
+	 * @return Array index of the target account in accounts.
+	 */
+	public ArrayList<Integer> findByName(String account_type, String fname, String lname) {
+		ArrayList<Integer> results = new ArrayList<Integer>();
+		for (int i = 0; i < size; i++) {
+			if (accounts[i].getClass().getSimpleName().equals(account_type) && accounts[i].getHolder().getFname().equals(fname) && accounts[i].getHolder().getLname().equals(lname)) {
+				results.add(i);
+			}
+		}
+		return results;
+	}
+
+	/**
 	 * Grow the capacity of accounts by 5.
 	 */
 	private void grow() {
@@ -73,7 +104,7 @@ public class AccountDatabase {
 	 *         False if the account exists.
 	 */
 	public boolean add(Account account) {
-		if (find(account) != LAST_NO) {
+		if (findByAccountId(account.getAccountId()) != -1) {
 			return false;
 		}
 		if (size == accounts.length) {
@@ -133,7 +164,7 @@ public class AccountDatabase {
 			return 1;
 		}
 		accounts[index].debit(amount);
-		if (accounts[index].getClass().toString().equals("class MoneyMarket")) {
+		if (accounts[index].getClass().getSimpleName().equals("MoneyMarket")) {
 			((MoneyMarket) accounts[index]).increaseWithdrawals();
 		}
 		return 0;
@@ -262,7 +293,7 @@ public class AccountDatabase {
 			}
 			
 			try {
-				UUID uuid = UUID.fromString(scl.next());
+				String accountId = scl.next();
 				String accountType = scl.next();
 
 				if (accountType.equals("C") || accountType.equals("S") || accountType.equals("M")) {
@@ -279,13 +310,13 @@ public class AccountDatabase {
 					Account newAccount = null;
 					if (accountType.equals("C")) {
 						boolean directDeposit = scl.nextBoolean();
-						newAccount = new Checking(new Profile(fname, lname), balance, date, directDeposit, uuid);
+						newAccount = new Checking(new Profile(fname, lname), balance, date, directDeposit, accountId);
 					} else if (accountType.equals("S")) {
 						boolean isLoyal = scl.nextBoolean();
-						newAccount = new Savings(new Profile(fname, lname), balance, date, isLoyal, uuid);
+						newAccount = new Savings(new Profile(fname, lname), balance, date, isLoyal, accountId);
 					} else {
 						int withdrawals = scl.nextInt();
-						newAccount = new MoneyMarket(new Profile(fname, lname), balance, date, withdrawals, uuid);
+						newAccount = new MoneyMarket(new Profile(fname, lname), balance, date, withdrawals, accountId);
 					}
 
 					if (add(newAccount)) {
@@ -319,7 +350,7 @@ public class AccountDatabase {
 			FileWriter fw = new FileWriter("Database.txt");
 			for (int i = 0; i < size; i++) {
 				Account account = accounts[i];
-				fw.write(account.getUuid() + ",");
+				fw.write(account.getAccountId() + ",");
 				fw.write(account.getClass().getSimpleName().charAt(0) + ",");
 				fw.write(account.getHolder().getFname() + ",");
 				fw.write(account.getHolder().getLname() + ",");

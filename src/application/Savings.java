@@ -76,7 +76,7 @@ public class Savings extends Account {
 	 */
 	@Override
 	public String toString() {
-		String output = "*Savings*" + super.toString();
+		String output = super.toString();
 		if (isLoyal) {
 			output += "*special Savings account*";
 		}

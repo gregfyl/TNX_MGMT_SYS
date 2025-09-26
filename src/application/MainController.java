@@ -201,20 +201,29 @@ public class MainController {
 			return;
 		}
 
-		Account targetAccount = null;
+		String targetAccountType = null;
 		if (SChecking.isSelected()) {
-			targetAccount = new Checking(new Profile(fname, lname), EMPTY, null, false);
+			targetAccountType = "Checking";
 		} else if (SSavings.isSelected()) {
-			targetAccount = new Savings(new Profile(fname, lname), EMPTY, null, false);
+			targetAccountType = "Savings";
 		} else {
-			targetAccount = new MoneyMarket(new Profile(fname, lname), EMPTY, null, EMPTY);
+			targetAccountType = "MoneyMarket";
 		}
 
-		if (accounts.remove(targetAccount)) {
-			addOutput("Account closed and removed from the database.\n");
-		} else {
-			addOutput("Account does not exist.\n");
-		}
+		System.out.println(accounts.findByName(targetAccountType, fname, lname));
+	}
+
+	/**
+	 * Clear Close section.
+	 * @param event ActionEvent.
+	 */
+	@FXML
+	void Sclear(ActionEvent event) {
+		Sfname.clear();
+		Slname.clear();
+		SChecking.setSelected(false);
+		SSavings.setSelected(false);
+		SMoneyMarket.setSelected(false);
 	}
 
 	/** TextFields in Close section. */
@@ -525,5 +534,4 @@ public class MainController {
 	void end(ActionEvent event) {
 		Platform.exit();
 	}
-
 }

@@ -72,7 +72,7 @@ public class Checking extends Account {
 	 */
 	@Override
 	public String toString() {
-		String output = "*Checking*" + super.toString();
+		String output = super.toString();
 		if (directDeposit) {
 			output += "*direct deposit account*";
 		}

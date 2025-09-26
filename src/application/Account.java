@@ -66,7 +66,7 @@ public abstract class Account {
 	 */
 	@Override
 	public String toString() {
-		return holder.toString() + "* $" + String.format("%,.2f", balance) + "*" + dateOpen;
+		return accountId + "*" + this.getClass().getSimpleName() + "*" + holder.toString() + "* $" + String.format("%,.2f", balance) + "*" + dateOpen;
 	}
 
 	/**
