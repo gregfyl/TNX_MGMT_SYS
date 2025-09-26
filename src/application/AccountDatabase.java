@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -59,7 +60,7 @@ public class AccountDatabase {
 	 * @param accountId Account unique identifier.
 	 * @return Index of the target account in accounts. -1 if no target account.
 	 */
-	private int findByAccountId(String accountId) {
+	public int findByAccountId(String accountId) {
 		for (int i = 0; i < size; i++) {
 			if (accounts[i].getAccountId().equals(accountId)) {
 				return i;
@@ -70,16 +71,19 @@ public class AccountDatabase {
 
 	/**
 	 * Find an account from accounts.
-	 * @param accountId Account unique identifier.
-	 * @return Index of the target account in accounts. -1 if no target account.
+	 *
+	 * @param fname First name of the account holder.
+	 * @param lname Last name of the account holder.
+	 * @return Array index of the target account in accounts.
 	 */
-	private int findByName(String fname, String lname) {
+	public ArrayList<Integer> findByName(String account_type, String fname, String lname) {
+		ArrayList<Integer> results = new ArrayList<Integer>();
 		for (int i = 0; i < size; i++) {
-			if (accounts[i].getHolder().getFname().equals(fname) && accounts[i].getHolder().getLname().equals(lname)) {
-				return i;
+			if (accounts[i].getClass().getSimpleName().equals(account_type) && accounts[i].getHolder().getFname().equals(fname) && accounts[i].getHolder().getLname().equals(lname)) {
+				results.add(i);
 			}
 		}
-		return -1;
+		return results;
 	}
 
 	/**
@@ -100,7 +104,7 @@ public class AccountDatabase {
 	 *         False if the account exists.
 	 */
 	public boolean add(Account account) {
-		if (find(account) != LAST_NO) {
+		if (findByAccountId(account.getAccountId()) != -1) {
 			return false;
 		}
 		if (size == accounts.length) {
@@ -160,7 +164,7 @@ public class AccountDatabase {
 			return 1;
 		}
 		accounts[index].debit(amount);
-		if (accounts[index].getClass().toString().equals("class MoneyMarket")) {
+		if (accounts[index].getClass().getSimpleName().equals("MoneyMarket")) {
 			((MoneyMarket) accounts[index]).increaseWithdrawals();
 		}
 		return 0;
@@ -270,7 +274,7 @@ public class AccountDatabase {
 		output += "--end of listing--\n";
 		return output;
 	}
-
+	
 	/**
 	 * Print accounts by list.
 	 * @param file Imported file.
@@ -287,7 +291,7 @@ public class AccountDatabase {
 			if (command.length() == EMPTY) {
 				continue; // If command is empty, ignore it and read next command.
 			}
-
+			
 			try {
 				String accountId = scl.next();
 				String accountType = scl.next();
@@ -335,7 +339,7 @@ public class AccountDatabase {
 		sc.close();
 		return output;
 	}
-
+	
 	/**
 	 * Export the database to file.
 	 * @return Output string.
@@ -352,7 +356,7 @@ public class AccountDatabase {
 				fw.write(account.getHolder().getLname() + ",");
 				fw.write(String.format("%.2f", account.getBalance()) + ",");
 				fw.write(account.getDateOpen() + ",");
-
+				
 				if(account.getClass().getSimpleName().equals("Checking")) {
 					fw.write(((Checking) account).getDirectDeposit() + "\n");
 				} else if(account.getClass().getSimpleName().equals("Savings")) {
@@ -360,7 +364,7 @@ public class AccountDatabase {
 				} else {
 					fw.write(((MoneyMarket) account).getWithdrawals() + "\n");
 				}
-
+				
 			}
 			output += "Export to Database.txt complete.\n";
 			fw.close();

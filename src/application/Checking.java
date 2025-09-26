@@ -1,6 +1,5 @@
 package application;
 
-import java.util.UUID;
 /**
  * Checking Class
  * This class defines the Checking account.
@@ -34,17 +33,18 @@ public class Checking extends Account {
 	}
 
 	/**
-	 * 2nd constructor Initialize the account by holder, balance, dateOpen, directDeposit and UUID.
+	 * Initialize the account by holder, balance, dateOpen, and directDeposit.
 	 * @param holder        Holder of the account.
 	 * @param balance       Balance of the account.
 	 * @param dateOpen      Date of the account opened.
 	 * @param directDeposit Direct deposit information of the account.
-	 * @param uuid Account unique identifier.
+	 * @param accountId Account unique identifier.
 	 */
-	public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit, UUID uuid) {
-		super(holder, balance, dateOpen, uuid);
+	public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit, String accountId) {
+		super(holder, balance, dateOpen, accountId);
 		this.directDeposit = directDeposit;
 	}
+
 	/**
 	 * Calculate the monthly interest of the account.
 	 * @return Monthly interest of the account.
@@ -72,7 +72,7 @@ public class Checking extends Account {
 	 */
 	@Override
 	public String toString() {
-		String output = "*Checking*" + super.toString();
+		String output = super.toString();
 		if (directDeposit) {
 			output += "*direct deposit account*";
 		}
