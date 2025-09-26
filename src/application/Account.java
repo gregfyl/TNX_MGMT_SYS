@@ -1,5 +1,6 @@
 package application;
 
+import java.util.UUID;
 /**
  * Account Class
  * This is an abstract class that defines the common features of all account types.
@@ -14,6 +15,22 @@ public abstract class Account {
 	/** Date of the account opened. */
 	private Date dateOpen;
 
+	/** Account unique identifier. */
+	private UUID uuid;
+
+	/**
+	 * Initialize the account by holder, balance, and dateOpen.
+	 * @param holder   Holder of the account.
+	 * @param balance  Balance of the account.
+	 * @param dateOpen Date of the account opened.
+	 * @param uuid Account unique identifier.
+	 */
+	public Account(Profile holder, double balance, Date dateOpen, UUID uuid) {
+		this.holder = holder;
+		this.balance = balance;
+		this.dateOpen = dateOpen;
+		this.uuid = uuid;
+	}
 	/**
 	 * Initialize the account by holder, balance, and dateOpen.
 	 * @param holder   Holder of the account.
@@ -24,6 +41,7 @@ public abstract class Account {
 		this.holder = holder;
 		this.balance = balance;
 		this.dateOpen = dateOpen;
+		this.uuid = UUID.randomUUID();
 	}
 
 	/**
@@ -104,5 +122,14 @@ public abstract class Account {
 	public Date getDateOpen() {
 		return dateOpen;
 	}
+
+	/**
+	 * Get the account unique identifier.
+	 * @return Account unique identifier.
+	 */
+	public UUID getUuid() {
+		return uuid;
+	}
+
 
 }
