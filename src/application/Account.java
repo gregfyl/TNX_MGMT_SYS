@@ -123,12 +123,6 @@ public abstract class Account {
 		return dateOpen;
 	}
 
-	/**
-	 * Get the account unique identifier.
-	 * @return Account unique identifier.
-	 */
-	public String getAccountId() {
-		return accountId;
 
 	/**
 	 * Get the account unique identifier.
