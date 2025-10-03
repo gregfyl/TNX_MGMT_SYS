@@ -1,6 +1,5 @@
 package application;
 
-import java.util.UUID;
 /**
  * Savings Class
  * This class defines the Savings account.
@@ -36,15 +35,15 @@ public class Savings extends Account {
 	}
 
 	/**
-	 * 2nd constructor Initialize the account by holder, balance, dateOpen, isLoyal and uuid.
+	 * Initialize the account by holder, balance, dateOpen, and isLoyal.
 	 * @param holder   Holder of the account.
 	 * @param balance  Balance of the account.
 	 * @param dateOpen Date of the account opened.
 	 * @param isLoyal  Loyal customer information of the account.
-	 * @param uuid Account unique identifier.
+	 * @param accountId Account unique identifier.
 	 */
-	public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal, UUID uuid) {
-		super(holder, balance, dateOpen, uuid);
+	public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal, String accountId) {
+		super(holder, balance, dateOpen, accountId);
 		this.isLoyal = isLoyal;
 	}
 
@@ -77,7 +76,7 @@ public class Savings extends Account {
 	 */
 	@Override
 	public String toString() {
-		String output = "*Savings*" + super.toString();
+		String output = super.toString();
 		if (isLoyal) {
 			output += "*special Savings account*";
 		}

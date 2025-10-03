@@ -1,6 +1,7 @@
 package application;
 
 import java.util.UUID;
+
 /**
  * MoneyMarket Class
  * This class defines the Money Market account.
@@ -37,17 +38,16 @@ public class MoneyMarket extends Account {
 		this.withdrawals = withdrawals;
 	}
 
-
 	/**
-	 * 2nd constructor Initialize the account by holder, balance, dateOpen, withdrawals and uuid.
+	 * Initialize the account by holder, balance, dateOpen, and withdrawals.
 	 * @param holder      Holder of the account.
 	 * @param balance     Balance of the account.
 	 * @param dateOpen    Date of the account opened.
 	 * @param withdrawals Number of withdrawal(s) of the account.
-	 * @param uuid Account unique identifier.
+	 * @param accountId Account unique identifier.
 	 */
-	public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals, UUID uuid) {
-		super(holder, balance, dateOpen, uuid);
+	public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals, String accountId) {
+		super(holder, balance, dateOpen, accountId);
 		this.withdrawals = withdrawals;
 	}
 
@@ -78,7 +78,7 @@ public class MoneyMarket extends Account {
 	 */
 	@Override
 	public String toString() {
-		String output = "*Money Market*" + super.toString();
+		String output = super.toString();
 		if (withdrawals == ONE_WITHDRAWAL) {
 			output += "*" + withdrawals + " withdrawal*";
 		} else {

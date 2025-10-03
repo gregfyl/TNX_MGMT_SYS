@@ -252,7 +252,7 @@ public class AccountDatabase {
 		output += "--end of listing--\n";
 		return output;
 	}
-
+	
 	/**
 	 * Print accounts by list.
 	 * @param file Imported file.
@@ -269,7 +269,7 @@ public class AccountDatabase {
 			if (command.length() == EMPTY) {
 				continue; // If command is empty, ignore it and read next command.
 			}
-
+			
 			try {
 				String accountId = scl.next();
 				String accountType = scl.next();
@@ -317,7 +317,7 @@ public class AccountDatabase {
 		sc.close();
 		return output;
 	}
-
+	
 	/**
 	 * Export the database to file.
 	 * @return Output string.
@@ -334,7 +334,7 @@ public class AccountDatabase {
 				fw.write(account.getHolder().getLname() + ",");
 				fw.write(String.format("%.2f", account.getBalance()) + ",");
 				fw.write(account.getDateOpen() + ",");
-
+				
 				if(account.getClass().getSimpleName().equals("Checking")) {
 					fw.write(((Checking) account).getDirectDeposit() + "\n");
 				} else if(account.getClass().getSimpleName().equals("Savings")) {
@@ -342,7 +342,7 @@ public class AccountDatabase {
 				} else {
 					fw.write(((MoneyMarket) account).getWithdrawals() + "\n");
 				}
-
+				
 			}
 			output += "Export to Database.txt complete.\n";
 			fw.close();
