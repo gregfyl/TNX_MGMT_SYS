@@ -600,7 +600,7 @@
                                                 <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <RadioButton fx:id="PList" mnemonicParsing="false" text="Print Accounts (No Statement)">
+                                                <RadioButton fx:id="PDate" mnemonicParsing="false" text="Print Accounts by Date Opened">
                                                     <GridPane.margin>
                                                         <Insets left="220.0" />
                                                     </GridPane.margin>
@@ -608,12 +608,12 @@
                                                         <ToggleGroup fx:id="Print" />
                                                     </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="PDate" mnemonicParsing="false" text="Account Statement by Date Opened" toggleGroup="$Print" GridPane.rowIndex="1">
+                                                <RadioButton fx:id="PFname" mnemonicParsing="false" text="Print Accounts by First Name" toggleGroup="$Print" GridPane.rowIndex="1">
                                                     <GridPane.margin>
                                                         <Insets left="220.0" />
                                                     </GridPane.margin>
                                                 </RadioButton>
-                                                <RadioButton fx:id="PName" mnemonicParsing="false" text="Account Statement by Last Name" toggleGroup="$Print" GridPane.rowIndex="2">
+                                                <RadioButton fx:id="PLname" mnemonicParsing="false" text="Print Accounts by Last Name" toggleGroup="$Print" GridPane.rowIndex="2">
                                                     <GridPane.margin>
                                                         <Insets left="220.0" />
                                                     </GridPane.margin>
@@ -641,6 +641,29 @@
                                                 </Button>
                                             </children>
                                         </GridPane>
+                                    </children>
+                                </GridPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Settlement">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="700.0">
+                            <children>
+                                <GridPane layoutX="35.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="630.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="315.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="180.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#settle" prefWidth="120.0" text="Settle" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                            <GridPane.margin>
+                                                <Insets top="12.0" />
+                                            </GridPane.margin>
+                                        </Button>
                                     </children>
                                 </GridPane>
                             </children></AnchorPane>

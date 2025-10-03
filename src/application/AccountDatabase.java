@@ -203,71 +203,49 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * Print accounts by date of accounts opened in ascending order.
-	 * @return Accounts in string format.
+	 * Sort accounts by the last name of the holder of accounts in ascending order.
 	 */
-	public String statementByDateOpen() {
-		String output = "";
-		if (size == INITIAL_SIZE) {
-			return "Database is empty.\n";
-		}
-		sortByDateOpen();
-		output += "--Printing statements by date opened--\n";
+	private void sortByFirstName() {
 		for (int i = 0; i < size; i++) {
-			output += accounts[i].toString() + "\n";
-
-			double interest = Double.valueOf(accounts[i].monthlyInterest());
-			accounts[i].credit(interest);
-			output += "-interest: $ " + String.format("%,.2f", interest) + "\n";
-
-			double fee = accounts[i].monthlyFee();
-			accounts[i].debit(fee);
-			output += "-fee: $ " + String.format("%,.2f", fee) + "\n";
-
-			output += "-new balance: $ " + String.format("%,.2f", accounts[i].getBalance()) + "\n";
+			for (int j = i; j >= 0; j--) {
+				if (accounts[j].getHolder().getFname().compareTo(accounts[i].getHolder().getFname()) > 0) {
+					Account temp = accounts[j];
+					accounts[j] = accounts[i];
+					accounts[i] = temp;
+					i = j;
+				}
+			}
 		}
-		output += "--end of printing--\n";
-		return output;
 	}
 
 	/**
-	 * Print accounts by the last name of the holder of accounts in ascending order.
-	 * @return Accounts in string format.
 	 */
-	public String statementByLastName() {
-		String output = "";
-		if (size == INITIAL_SIZE) {
-			return "Database is empty.\n";
-		}
-		sortByLastName();
-		output += "--Printing statements by last name--\n";
+	public void settle() {
 		for (int i = 0; i < size; i++) {
-			output += accounts[i].toString() + "\n";
-
 			double interest = Double.valueOf(accounts[i].monthlyInterest());
 			accounts[i].credit(interest);
-			output += "-interest: $ " + String.format("%,.2f", interest) + "\n";
-
 			double fee = accounts[i].monthlyFee();
 			accounts[i].debit(fee);
-			output += "-fee: $ " + String.format("%,.2f", fee) + "\n";
-
-			output += "-new balance: $ " + String.format("%,.2f", accounts[i].getBalance()) + "\n";
 		}
-		output += "--end of printing--\n";
-		return output;
 	}
 
 	/**
 	 * Print accounts by list.
 	 * @return Accounts in string format.
 	 */
-	public String printAccount() {
+	public String printAccount(String sort) {
 		String output = "";
 		if (size == INITIAL_SIZE) {
 			return "Database is empty.\n";
 		}
-		output += "--Listing accounts in the database--\n";
+		if (sort.equals("first name")) {
+			sortByFirstName();
+		} else if (sort.equals("last name")) {
+			sortByLastName();
+		} else {
+			sortByDateOpen();
+		}
+		output += "--Printing accounts by " + sort + "--\n";
 		for (int i = 0; i < size; i++) {
 			output += accounts[i].toString() + "\n";
 		}

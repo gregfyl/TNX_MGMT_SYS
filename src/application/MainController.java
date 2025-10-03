@@ -446,7 +446,7 @@ public class MainController {
 
 	/** RadioButtons in Print section. */
 	@FXML
-	private RadioButton PList, PDate, PName;
+	private RadioButton PDate, PFname, PLname;
 
 	/** ToggleGroup in Print section. */
 	@FXML
@@ -458,16 +458,16 @@ public class MainController {
 	 */
 	@FXML
 	void print(ActionEvent event) {
-		if (!PList.isSelected() && !PDate.isSelected() && !PName.isSelected()) {
+		if (!PFname.isSelected() && !PLname.isSelected() && !PDate.isSelected()) {
 			addOutput("Please select print method.\n");
 			return;
 		}
-		if (PList.isSelected()) {
-			addOutput(accounts.printAccount());
-		} else if (PDate.isSelected()) {
-			addOutput(accounts.statementByDateOpen());
+		if (PFname.isSelected()) {
+			addOutput(accounts.printAccount("first name"));
+		} else if (PLname.isSelected()) {
+			addOutput(accounts.printAccount("last name"));
 		} else {
-			addOutput(accounts.statementByLastName());
+			addOutput(accounts.printAccount("date opened"));
 		}
 	}
 
@@ -477,9 +477,19 @@ public class MainController {
 	 */
 	@FXML
 	void Pclear(ActionEvent event) {
-		PList.setSelected(false);
 		PDate.setSelected(false);
-		PName.setSelected(false);
+		PFname.setSelected(false);
+		PLname.setSelected(false);
+	}
+
+	/**
+	 * Import the database from file.
+	 * @param event ActionEvent.
+	 */
+	@FXML
+	void settle(ActionEvent event) {
+		accounts.settle();
+		addOutput("All accounts have been settled.\n");
 	}
 
 	/**
