@@ -41,6 +41,10 @@ public class AccountDatabase {
 		size = INITIAL_SIZE;
 	}
 
+	public Account getAccount(int index) {
+		return accounts[index];
+	}
+
 	/**
 	 * Find an account from accounts.
 	 * @param account Target account to be found.
@@ -144,7 +148,9 @@ public class AccountDatabase {
 		if (index == LAST_NO) {
 			return false;
 		}
+		amount = Math.round(amount * 100) / 100.0;
 		accounts[index].credit(amount);
+		accounts[index].addTransaction("Credit", amount, null, "Deposit");
 		return true;
 	}
 
@@ -163,7 +169,9 @@ public class AccountDatabase {
 		} else if (accounts[index].getBalance() < amount) {
 			return 1;
 		}
+		amount = Math.round(amount * 100) / 100.0;
 		accounts[index].debit(amount);
+		accounts[index].addTransaction("Debit", amount, null, "Withdrawal");
 		if (accounts[index].getClass().getSimpleName().equals("MoneyMarket")) {
 			((MoneyMarket) accounts[index]).increaseWithdrawals();
 		}
@@ -202,7 +210,6 @@ public class AccountDatabase {
 		}
 	}
 
-
 	/**
 	 * Sort accounts by the last name of the holder of accounts in ascending order.
 	 */
@@ -220,67 +227,19 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * Print accounts by the last name of the holder of accounts in ascending order.
-	 * @return Accounts in string format.
-	 */
-	public String printAccountByLastName() {
-		String output = "";
-		if (size == INITIAL_SIZE) {
-			return "Database is empty.\n";
-		}
-		sortByLastName();
-		output += "--Printing accounts by last name--\n";
-		for (int i = 0; i < size; i++) {
-			output += accounts[i].toString() + "\n";
-		}
-		output += "--end of listing--\n";
-		return output;
-	}
-
-	/**
-	 * Print accounts by the first name of the holder of accounts in ascending order.
-	 * @return Accounts in string format.
-	 */
-	public String printAccountByFirstName() {
-		String output = "";
-		if (size == INITIAL_SIZE) {
-			return "Database is empty.\n";
-		}
-		sortByFirstName();
-		output += "--Printing accounts by first name--\n";
-		for (int i = 0; i < size; i++) {
-			output += accounts[i].toString() + "\n";
-		}
-		output += "--end of listing--\n";
-		return output;
-	}
-
-	/**
-	 * Print accounts by the first name of the holder of accounts in ascending order.
-	 * @return Accounts in string format.
-	 */
-	public String printAccountByDateOpen() {
-		String output = "";
-		if (size == INITIAL_SIZE) {
-			return "Database is empty.\n";
-		}
-		sortByDateOpen();
-		output += "--Printing accounts by date open--\n";
-		for (int i = 0; i < size; i++) {
-			output += accounts[i].toString() + "\n";
-		}
-		output += "--end of listing--\n";
-		return output;
-	}
-
-	/**
 	 */
 	public void settle() {
 		for (int i = 0; i < size; i++) {
-			double interest = Double.valueOf(accounts[i].monthlyInterest());
-			accounts[i].credit(interest);
-			double fee = accounts[i].monthlyFee();
-			accounts[i].debit(fee);
+			double interest = Math.round(accounts[i].monthlyInterest() * 100) / 100.0;
+			if (interest != 0) {
+				accounts[i].credit(interest);
+				accounts[i].addTransaction("Credit", interest, null, "Interest");
+			}
+			double fee = Math.round(accounts[i].monthlyFee() * 100) / 100.0;
+			if (fee != 0){
+				accounts[i].debit(fee);
+				accounts[i].addTransaction("Debit", fee, null, "Fee");
+			}
 		}
 	}
 
@@ -307,7 +266,7 @@ public class AccountDatabase {
 		output += "--end of listing--\n";
 		return output;
 	}
-	
+
 	/**
 	 * Print accounts by list.
 	 * @param file Imported file.
@@ -324,7 +283,7 @@ public class AccountDatabase {
 			if (command.length() == EMPTY) {
 				continue; // If command is empty, ignore it and read next command.
 			}
-			
+
 			try {
 				String accountId = scl.next();
 				String accountType = scl.next();
@@ -372,7 +331,7 @@ public class AccountDatabase {
 		sc.close();
 		return output;
 	}
-	
+
 	/**
 	 * Export the database to file.
 	 * @return Output string.
@@ -389,7 +348,7 @@ public class AccountDatabase {
 				fw.write(account.getHolder().getLname() + ",");
 				fw.write(String.format("%.2f", account.getBalance()) + ",");
 				fw.write(account.getDateOpen() + ",");
-				
+
 				if(account.getClass().getSimpleName().equals("Checking")) {
 					fw.write(((Checking) account).getDirectDeposit() + "\n");
 				} else if(account.getClass().getSimpleName().equals("Savings")) {
@@ -397,7 +356,7 @@ public class AccountDatabase {
 				} else {
 					fw.write(((MoneyMarket) account).getWithdrawals() + "\n");
 				}
-				
+
 			}
 			output += "Export to Database.txt complete.\n";
 			fw.close();

@@ -1,5 +1,8 @@
 package application;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Account Class
@@ -16,6 +19,8 @@ public abstract class Account {
 	private Date dateOpen;
 	/** Account unique identifier. */
 	private String accountId;
+	/** Account transactions. */
+	private List<Transaction> transactions = new ArrayList<>();
 
 	/**
 	 * Initialize the account by holder, balance, and dateOpen.
@@ -25,10 +30,17 @@ public abstract class Account {
 	 * @param accountId Account unique identifier.
 	 */
 	public Account(Profile holder, double balance, Date dateOpen, String accountId) {
+		balance = Math.round(balance * 100) / 100.0;
 		this.holder = holder;
 		this.balance = balance;
 		this.dateOpen = dateOpen;
 		this.accountId = accountId;
+		this.transactions = new ArrayList<>();
+		if (balance > 0) {
+			addTransaction("Credit", balance, dateOpen, "Initial");
+		} else {
+			addTransaction("Debit", balance, dateOpen, "Initial");
+		}
 	}
 
 	/**
@@ -38,10 +50,27 @@ public abstract class Account {
 	 * @param dateOpen Date of the account opened.
 	 */
 	public Account(Profile holder, double balance, Date dateOpen) {
+		balance = Math.round(balance * 100) / 100.0;
 		this.holder = holder;
 		this.balance = balance;
 		this.dateOpen = dateOpen;
 		this.accountId = String.valueOf(UUID.randomUUID());
+		this.transactions = new ArrayList<>();
+		if (balance > 0) {
+			addTransaction("Credit", balance, dateOpen, "Initial");
+		} else {
+			addTransaction("Debit", balance, dateOpen, "Initial");
+		}
+	}
+
+	public void addTransaction(String type, double amount, Date date, String note) {
+		Transaction transaction;
+		if (date == null){
+			transaction = new Transaction(type, amount, note);
+		} else {
+			transaction = new Transaction(type, amount, date, note);
+		}
+		transactions.addFirst(transaction);
 	}
 
 	/**
@@ -60,13 +89,30 @@ public abstract class Account {
 		balance += amount;
 	}
 
+	public String toStringSubclassExtra(){
+		return "";
+	}
+
 	/**
 	 * Convert the account to a string.
 	 * @return The account in string format.
 	 */
 	@Override
 	public String toString() {
-		return accountId + "*" + this.getClass().getSimpleName() + "*" + holder.toString() + "* $" + String.format("%,.2f", balance) + "*" + dateOpen;
+		String account_str = "********************************************************\n";
+		account_str += "Account ID: " + accountId + "\n";
+		account_str += "Account Type: " + this.getClass().getSimpleName() + "\n";
+		account_str += "Account Holder: " + holder.toString() + "\n";
+		account_str += "Account Balance: $" + String.format("%,.2f", balance) + "\n";
+		account_str += "Account Opened: " + dateOpen + "\n";
+		account_str += toStringSubclassExtra();
+		account_str += "Transactions\n";
+		String transactionsStr = transactions.stream()
+				.map(Object::toString)
+				.collect(Collectors.joining("\n- ", "- ", ""));
+		account_str += transactionsStr + "\n";
+		account_str += "********************************************************";
+		return account_str;
 	}
 
 	/**
