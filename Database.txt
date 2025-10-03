@@ -2,3 +2,8 @@
 6ccd7920-298c-45d4-aa0d-4249c57d6e83,C,Lixue,Chen,10000.42,7/31/2024,false
 ad36c521-be14-4380-a571-94610932578b,S,Maggie,Aaron,10002.08,7/31/2025,false
 7ace7606-2ca6-4def-befd-ecf7d5a5fa36,C,Lixue,Chen,1000.00,8/9/2025,true
+9c2b10d6-4ead-4b2d-9602-beadf3bb7156,C,Yunxiao,Tu,9053.38,6/6/2024,true
+7be88f56-1189-4305-af07-49e7a1dd8eba,M,Yunxiao,Tu,3456.88,2/28/2025,0
+310f3707-2739-484f-9b12-04b10c050eb4,S,Yunlong,Fu,6666.66,8/21/2025,true
+80729fc4-be6d-4e27-8f2c-d7f59adbda7e,S,Chichen,Wang,9000.00,3/3/2023,false
+e55b8d89-bdfb-40ed-9fae-31d9e9c64350,C,Chichen,Wang,9000.00,3/3/2023,false

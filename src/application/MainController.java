@@ -8,6 +8,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /**
  * TransactionManager Class
@@ -210,7 +211,12 @@ public class MainController {
 			targetAccountType = "MoneyMarket";
 		}
 
-		System.out.println(accounts.findByName(targetAccountType, fname, lname));
+		ArrayList<Integer> target_accounts = accounts.findByName(targetAccountType, fname, lname);
+		StringBuilder output = new StringBuilder("Search Result:\n");
+		for (int targetAccount : target_accounts) {
+			output.append(accounts.getAccount(targetAccount)).append("\n");
+		}
+		addOutput(output.toString());
 	}
 
 	/**
