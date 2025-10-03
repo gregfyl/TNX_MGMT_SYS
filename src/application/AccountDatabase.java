@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -59,7 +60,7 @@ public class AccountDatabase {
 	 * @param accountId Account unique identifier.
 	 * @return Index of the target account in accounts. -1 if no target account.
 	 */
-	private int findByAccountId(String accountId) {
+	public int findByAccountId(String accountId) {
 		for (int i = 0; i < size; i++) {
 			if (accounts[i].getAccountId().equals(accountId)) {
 				return i;
@@ -70,16 +71,19 @@ public class AccountDatabase {
 
 	/**
 	 * Find an account from accounts.
-	 * @param accountId Account unique identifier.
-	 * @return Index of the target account in accounts. -1 if no target account.
+	 *
+	 * @param fname First name of the account holder.
+	 * @param lname Last name of the account holder.
+	 * @return Array index of the target account in accounts.
 	 */
-	private int findByName(String fname, String lname) {
+	public ArrayList<Integer> findByName(String account_type, String fname, String lname) {
+		ArrayList<Integer> results = new ArrayList<Integer>();
 		for (int i = 0; i < size; i++) {
-			if (accounts[i].getHolder().getFname().equals(fname) && accounts[i].getHolder().getLname().equals(lname)) {
-				return i;
+			if (accounts[i].getClass().getSimpleName().equals(account_type) && accounts[i].getHolder().getFname().equals(fname) && accounts[i].getHolder().getLname().equals(lname)) {
+				results.add(i);
 			}
 		}
-		return -1;
+		return results;
 	}
 
 	/**
@@ -100,7 +104,7 @@ public class AccountDatabase {
 	 *         False if the account exists.
 	 */
 	public boolean add(Account account) {
-		if (find(account) != LAST_NO) {
+		if (findByAccountId(account.getAccountId()) != -1) {
 			return false;
 		}
 		if (size == accounts.length) {
@@ -160,7 +164,7 @@ public class AccountDatabase {
 			return 1;
 		}
 		accounts[index].debit(amount);
-		if (accounts[index].getClass().toString().equals("class MoneyMarket")) {
+		if (accounts[index].getClass().getSimpleName().equals("MoneyMarket")) {
 			((MoneyMarket) accounts[index]).increaseWithdrawals();
 		}
 		return 0;
@@ -199,71 +203,49 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * Print accounts by date of accounts opened in ascending order.
-	 * @return Accounts in string format.
+	 * Sort accounts by the last name of the holder of accounts in ascending order.
 	 */
-	public String statementByDateOpen() {
-		String output = "";
-		if (size == INITIAL_SIZE) {
-			return "Database is empty.\n";
-		}
-		sortByDateOpen();
-		output += "--Printing statements by date opened--\n";
+	private void sortByFirstName() {
 		for (int i = 0; i < size; i++) {
-			output += accounts[i].toString() + "\n";
-
-			double interest = Double.valueOf(accounts[i].monthlyInterest());
-			accounts[i].credit(interest);
-			output += "-interest: $ " + String.format("%,.2f", interest) + "\n";
-
-			double fee = accounts[i].monthlyFee();
-			accounts[i].debit(fee);
-			output += "-fee: $ " + String.format("%,.2f", fee) + "\n";
-
-			output += "-new balance: $ " + String.format("%,.2f", accounts[i].getBalance()) + "\n";
+			for (int j = i; j >= 0; j--) {
+				if (accounts[j].getHolder().getFname().compareTo(accounts[i].getHolder().getFname()) > 0) {
+					Account temp = accounts[j];
+					accounts[j] = accounts[i];
+					accounts[i] = temp;
+					i = j;
+				}
+			}
 		}
-		output += "--end of printing--\n";
-		return output;
 	}
 
 	/**
-	 * Print accounts by the last name of the holder of accounts in ascending order.
-	 * @return Accounts in string format.
 	 */
-	public String statementByLastName() {
-		String output = "";
-		if (size == INITIAL_SIZE) {
-			return "Database is empty.\n";
-		}
-		sortByLastName();
-		output += "--Printing statements by last name--\n";
+	public void settle() {
 		for (int i = 0; i < size; i++) {
-			output += accounts[i].toString() + "\n";
-
 			double interest = Double.valueOf(accounts[i].monthlyInterest());
 			accounts[i].credit(interest);
-			output += "-interest: $ " + String.format("%,.2f", interest) + "\n";
-
 			double fee = accounts[i].monthlyFee();
 			accounts[i].debit(fee);
-			output += "-fee: $ " + String.format("%,.2f", fee) + "\n";
-
-			output += "-new balance: $ " + String.format("%,.2f", accounts[i].getBalance()) + "\n";
 		}
-		output += "--end of printing--\n";
-		return output;
 	}
 
 	/**
 	 * Print accounts by list.
 	 * @return Accounts in string format.
 	 */
-	public String printAccount() {
+	public String printAccount(String sort) {
 		String output = "";
 		if (size == INITIAL_SIZE) {
 			return "Database is empty.\n";
 		}
-		output += "--Listing accounts in the database--\n";
+		if (sort.equals("first name")) {
+			sortByFirstName();
+		} else if (sort.equals("last name")) {
+			sortByLastName();
+		} else {
+			sortByDateOpen();
+		}
+		output += "--Printing accounts by " + sort + "--\n";
 		for (int i = 0; i < size; i++) {
 			output += accounts[i].toString() + "\n";
 		}

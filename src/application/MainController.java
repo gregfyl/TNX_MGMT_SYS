@@ -201,20 +201,29 @@ public class MainController {
 			return;
 		}
 
-		Account targetAccount = null;
+		String targetAccountType = null;
 		if (SChecking.isSelected()) {
-			targetAccount = new Checking(new Profile(fname, lname), EMPTY, null, false);
+			targetAccountType = "Checking";
 		} else if (SSavings.isSelected()) {
-			targetAccount = new Savings(new Profile(fname, lname), EMPTY, null, false);
+			targetAccountType = "Savings";
 		} else {
-			targetAccount = new MoneyMarket(new Profile(fname, lname), EMPTY, null, EMPTY);
+			targetAccountType = "MoneyMarket";
 		}
 
-		if (accounts.remove(targetAccount)) {
-			addOutput("Account closed and removed from the database.\n");
-		} else {
-			addOutput("Account does not exist.\n");
-		}
+		System.out.println(accounts.findByName(targetAccountType, fname, lname));
+	}
+
+	/**
+	 * Clear Close section.
+	 * @param event ActionEvent.
+	 */
+	@FXML
+	void Sclear(ActionEvent event) {
+		Sfname.clear();
+		Slname.clear();
+		SChecking.setSelected(false);
+		SSavings.setSelected(false);
+		SMoneyMarket.setSelected(false);
 	}
 
 	/** TextFields in Close section. */
@@ -437,7 +446,7 @@ public class MainController {
 
 	/** RadioButtons in Print section. */
 	@FXML
-	private RadioButton PList, PDate, PName;
+	private RadioButton PDate, PFname, PLname;
 
 	/** ToggleGroup in Print section. */
 	@FXML
@@ -449,16 +458,16 @@ public class MainController {
 	 */
 	@FXML
 	void print(ActionEvent event) {
-		if (!PList.isSelected() && !PDate.isSelected() && !PName.isSelected()) {
+		if (!PFname.isSelected() && !PLname.isSelected() && !PDate.isSelected()) {
 			addOutput("Please select print method.\n");
 			return;
 		}
-		if (PList.isSelected()) {
-			addOutput(accounts.printAccount());
-		} else if (PDate.isSelected()) {
-			addOutput(accounts.statementByDateOpen());
+		if (PFname.isSelected()) {
+			addOutput(accounts.printAccount("first name"));
+		} else if (PLname.isSelected()) {
+			addOutput(accounts.printAccount("last name"));
 		} else {
-			addOutput(accounts.statementByLastName());
+			addOutput(accounts.printAccount("date opened"));
 		}
 	}
 
@@ -468,9 +477,19 @@ public class MainController {
 	 */
 	@FXML
 	void Pclear(ActionEvent event) {
-		PList.setSelected(false);
 		PDate.setSelected(false);
-		PName.setSelected(false);
+		PFname.setSelected(false);
+		PLname.setSelected(false);
+	}
+
+	/**
+	 * Import the database from file.
+	 * @param event ActionEvent.
+	 */
+	@FXML
+	void settle(ActionEvent event) {
+		accounts.settle();
+		addOutput("All accounts have been settled.\n");
 	}
 
 	/**
@@ -525,5 +544,4 @@ public class MainController {
 	void end(ActionEvent event) {
 		Platform.exit();
 	}
-
 }
