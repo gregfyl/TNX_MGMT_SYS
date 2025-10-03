@@ -202,6 +202,7 @@ public class AccountDatabase {
 		}
 	}
 
+
 	/**
 	 * Sort accounts by the last name of the holder of accounts in ascending order.
 	 */
@@ -216,6 +217,60 @@ public class AccountDatabase {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Print accounts by the last name of the holder of accounts in ascending order.
+	 * @return Accounts in string format.
+	 */
+	public String printAccountByLastName() {
+		String output = "";
+		if (size == INITIAL_SIZE) {
+			return "Database is empty.\n";
+		}
+		sortByLastName();
+		output += "--Printing accounts by last name--\n";
+		for (int i = 0; i < size; i++) {
+			output += accounts[i].toString() + "\n";
+		}
+		output += "--end of listing--\n";
+		return output;
+	}
+
+	/**
+	 * Print accounts by the first name of the holder of accounts in ascending order.
+	 * @return Accounts in string format.
+	 */
+	public String printAccountByFirstName() {
+		String output = "";
+		if (size == INITIAL_SIZE) {
+			return "Database is empty.\n";
+		}
+		sortByFirstName();
+		output += "--Printing accounts by first name--\n";
+		for (int i = 0; i < size; i++) {
+			output += accounts[i].toString() + "\n";
+		}
+		output += "--end of listing--\n";
+		return output;
+	}
+
+	/**
+	 * Print accounts by the first name of the holder of accounts in ascending order.
+	 * @return Accounts in string format.
+	 */
+	public String printAccountByDateOpen() {
+		String output = "";
+		if (size == INITIAL_SIZE) {
+			return "Database is empty.\n";
+		}
+		sortByDateOpen();
+		output += "--Printing accounts by date open--\n";
+		for (int i = 0; i < size; i++) {
+			output += accounts[i].toString() + "\n";
+		}
+		output += "--end of listing--\n";
+		return output;
 	}
 
 	/**
