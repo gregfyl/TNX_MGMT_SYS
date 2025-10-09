@@ -1,12 +1,13 @@
 package application;
 import java.util.Date;
 
+
 /**
  * Account Class
  * This is an abstract class that defines the common features of all account types.
  */
 
-public abstract class Transaction {
+public class Transaction {
 
 	/** Transaction type, e.g. "deposit", "withdraw". */
 	private String type;
@@ -28,7 +29,7 @@ public abstract class Transaction {
 		this.type = type;
 		this.amount = amount;
 		this.note = note;
-		this.date = date;
+		this.date = null;
 	}
 
 }

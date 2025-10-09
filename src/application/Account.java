@@ -36,6 +36,8 @@ public abstract class Account {
 		this.dateOpen = dateOpen;
 		this.accountId = accountId;
 		this.transactions = new ArrayList<>();
+		addTransaction("", balance, dateOpen, "Initial");
+		this.transactions = new ArrayList<>();
 		if (balance > 0) {
 			addTransaction("Credit", balance, dateOpen, "Initial");
 		} else {
@@ -56,6 +58,7 @@ public abstract class Account {
 		this.dateOpen = dateOpen;
 		this.accountId = String.valueOf(UUID.randomUUID());
 		this.transactions = new ArrayList<>();
+		addTransaction("", balance, dateOpen, "Initial");
 		if (balance > 0) {
 			addTransaction("Credit", balance, dateOpen, "Initial");
 		} else {
@@ -63,10 +66,11 @@ public abstract class Account {
 		}
 	}
 
+
 	public void addTransaction(String type, double amount, Date date, String note) {
 		Transaction transaction;
 		if (date == null){
-			transaction = new Transaction(type, amount, note);
+			transaction = new Transaction(type, amount, null, note);
 		} else {
 			transaction = new Transaction(type, amount, date, note);
 		}
@@ -87,6 +91,7 @@ public abstract class Account {
 	 */
 	public void credit(double amount) {
 		balance += amount;
+		addTransaction("Deposit", amount, null, "Deposit");
 	}
 
 	public String toStringSubclassExtra(){
