@@ -31,5 +31,49 @@ public class Transaction {
 		this.note = note;
 		this.date = null;
 	}
+	// ===== Getters =====
+    public String getType() {
+        return type;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    // ===== Setters =====
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    // ===== Example modification: formatted summary =====
+    @Override
+    public String toString() {
+        return "Transaction[type=" + type + ", amount=" + amount + ", date=" + date + ", note=" + note + "]";
+    }
+
+    // Optional helper to print details
+    public void printTransaction() {
+        System.out.println(this.toString());
+    }
 
 }
