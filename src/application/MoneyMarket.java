@@ -72,19 +72,13 @@ public class MoneyMarket extends Account {
 		return FEE;
 	}
 
-	/**
-	 * Convert the account to a string.
-	 * @return The account in string format.
-	 */
 	@Override
-	public String toString() {
-		String output = super.toString();
+	public String toStringSubclassExtra(){
 		if (withdrawals == ONE_WITHDRAWAL) {
-			output += "*" + withdrawals + " withdrawal*";
+			return "Note: " + withdrawals + " Withdrawal\n";
 		} else {
-			output += "*" + withdrawals + " withdrawals*";
+			return "Note: " + withdrawals + " Withdrawals\n";
 		}
-		return output;
 	}
 
 	/**

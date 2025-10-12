@@ -1,6 +1,5 @@
 package application;
-import java.util.Date;
-
+//import java.util.Date;
 
 /**
  * Account Class
@@ -29,51 +28,48 @@ public class Transaction {
 		this.type = type;
 		this.amount = amount;
 		this.note = note;
-		this.date = null;
+		this.date = date;
 	}
-	// ===== Getters =====
-    public String getType() {
-        return type;
-    }
 
-    public double getAmount() {
-        return amount;
-    }
+	/**
+	 * Initialize the account by holder, balance, and dateOpen.
+	 * @param type  	Transaction type.
+	 * @param amount  	Transaction amount.
+	 * @param note 		Transaction remarks.
+	 */
+	public Transaction(String type, double amount, String note) {
+		this.type = type;
+		this.amount = amount;
+		this.note = note;
 
-    public Date getDate() {
-        return date;
-    }
+		java.time.LocalDate today = java.time.LocalDate.now();
+		int year = today.getYear();
+		int month = today.getMonthValue();
+		int day = today.getDayOfMonth();
+		this.date = new Date(year, month, day);
+	}
 
-    public String getNote() {
-        return note;
-    }
 
-    // ===== Setters =====
-    public void setType(String type) {
-        this.type = type;
-    }
+	/**
+	 * Convert the transaction to a string.
+	 * @return The transaction in string format.
+	 */
+	@Override
+	public String toString() {
+		return date + ", " + type + " $" + String.format("%,.2f", amount) + ", Note: " + note;
+	}
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
+	// getters and setters
+	public String getType() { return type; }
+	public void setType(String type) { this.type = type; }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public double getAmount() { return amount; }
+	public void setAmount(double amount) { this.amount = amount; }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+	public Date getDate() { return date; }
+	public void setDate(Date date) { this.date = date; }
 
-    // ===== Example modification: formatted summary =====
-    @Override
-    public String toString() {
-        return "Transaction[type=" + type + ", amount=" + amount + ", date=" + date + ", note=" + note + "]";
-    }
-
-    // Optional helper to print details
-    public void printTransaction() {
-        System.out.println(this.toString());
-    }
+	public String getNote() { return note; }
+	public void setNote(String note) { this.note = note; }
 
 }
