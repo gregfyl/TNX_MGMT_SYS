@@ -70,17 +70,12 @@ public class Savings extends Account {
 		return FEE;
 	}
 
-	/**
-	 * Convert the account to a string.
-	 * @return The account in string format.
-	 */
 	@Override
-	public String toString() {
-		String output = super.toString();
+	public String toStringSubclassExtra(){
 		if (isLoyal) {
-			output += "*special Savings account*";
+			return "Note: Special Savings Account\n";
 		}
-		return output;
+		return "";
 	}
 
 	/**

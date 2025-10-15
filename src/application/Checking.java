@@ -66,17 +66,12 @@ public class Checking extends Account {
 		return FEE;
 	}
 
-	/**
-	 * Convert the account to a string.
-	 * @return The account in string format.
-	 */
 	@Override
-	public String toString() {
-		String output = super.toString();
+	public String toStringSubclassExtra(){
 		if (directDeposit) {
-			output += "*direct deposit account*";
+			return "Note: Direct Deposit Account\n";
 		}
-		return output;
+		return "";
 	}
 
 	/**
